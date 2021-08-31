@@ -47,6 +47,7 @@
 			$datas['type'] = 'image';
 			$datas['originalContenturl'] = $text;
 			$datas['previewImageturl'] = $text;
+		}
 		return $datas;
 	}
 
