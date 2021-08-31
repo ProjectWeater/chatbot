@@ -45,8 +45,8 @@
 		}
 		if($type == "image") {
 			$datas['type'] = 'image';
-			$datas['originalContenturl'] = $text;
-			$datas['previewImageturl'] = $text;
+			$datas['originalContentUrl'] = $text;
+			$datas['previewImageUrl'] = $text;
 		}
 		return $datas;
 	}
