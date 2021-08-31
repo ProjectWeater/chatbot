@@ -36,7 +36,7 @@
 	/*Return HTTP Request 200*/
 	http_response_code(200);
 
-	function getFormatTextMessage($text)
+	function getFormatTextMessage($text, $type)
 	{
 		$datas = [];
 		if($type == "text") {
