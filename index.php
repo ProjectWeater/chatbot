@@ -16,7 +16,7 @@
 		$rep_msg = "OK, Hello Toi";
 		$reply_type = "text";
 	}else {
-		$rep_msg = "https://i.imgur.com/ObxhSgt.png";
+		$recv_msg = "https://i.imgur.com/ObxhSgt.png";
 		$reply_type = "image";
 	}
 		
@@ -24,7 +24,7 @@
 
 
 	
-	$messages['messages'][0] = getFormatTextMessage($rep_msg, $type);
+	$messages['messages'][0] = getFormatTextMessage($rep_msg, $reply_type);
 
 	$encodeJson = json_encode($messages);
 
