@@ -14,41 +14,41 @@
 
 	$messages = [];
 	$messages['replyToken'] = $replyToken;
+	$rep_msg = [];
 
 	if($recv_msg == "Toi") {
-		$rep_msg = "OK, Hello Toi";
-		$reply_type = "text";
-	}else{
-		$rep_msg = "https://i.imgur.com/ObxhSgt.png";
-		$reply_type = "image";
+		$url = "http://api.thingspeak.com/channels/1486243/feeds.json?results=1";
+		$strRet = file_get_contents($url);
+		$strRet = json_decode($strRet);
+		$strRet = $strRet->channel->field3;
+		 
+		$rep_msg['text'] = $strRet;
+		$rep_msg['type']='text';
+	}else if($recv_msg == "อยู่ไหน"){
+		$rep_msg['title']='My HOme';
+		$rep_msg['address']='1-6-1 Yotsuya, Shinjuku-ku, Tokyo, 160-0004, Japan';
+		$rep_msg['latitude']= 35.687574;
+		$rep_msg['longitude']= 139.72922;
+		$rep_msg['type']='location';
+	}
+	else{
+		$rep_msg['originalContentUrl'] = "https://i.imgur.com/ObxhSgt.png";
+		$rep_msg['previewImageUrl'] = "https://i.imgur.com/ObxhSgt.png";
+		$rep_msg['type']='image';
 	}
 		
 
-	$messages['messages'][0] = getFormatTextMessage($rep_msg, $reply_type);
+	$messages['messages'][0] =  $rep_msg;
 
 	$encodeJson = json_encode($messages);
 
 	$LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
-	$LINEDatas['token'] = "VwWkOSS39IWXMExM5SASHLT8V7GJMCIaFeMWy3HI19fP28GZz8v/K2LpDHqmjWNuhZzUMLWe4sJGOcjLZAm2ofyv8/dtH0ILQPGaUeQgOMTdw35+o0ZbD7yDg1qu7AYw5rKb9HXJyZvu/tgX0UckrAdB04t89/1O/w1cDnyilFU=";
-	$results = sentMessage($encodeJson,$LINEDatas);
+ 	$LINEDatas['token'] = "1WXhWz3PtaV5ZjkMkZJFL15BvPJGcZesK+51a+K75Klua+yb2BEXpiSsL+eBMDcC2ygdIdegLR4CLihRsOZhcAGsdp92ui0HtDTKQ/JdYOEEu6YtEbEIj5X8+vTpd4RGZhH2Ke7GbLeBV01NFWl1+QdB04t89/1O/w1cDnyilFU=";
+  	$results = sentMessage($encodeJson,$LINEDatas);
 
 	/*Return HTTP Request 200*/
 	http_response_code(200);
 
-	function getFormatTextMessage($text, $type)
-	{
-		$datas = [];
-		if($type == "text"){
-			$datas['type'] = 'text';
-			$datas['text'] = $text;		
-		}
-		if($type == "image"){
-			$datas['type'] = 'image';
-			$datas['originalContentUrl'] = $text;	
-			$datas['previewImageUrl'] = $text;	
-		}
-		return $datas;
-	}
 
 	function sentMessage($encodeJson,$datas)
 	{
