@@ -42,7 +42,7 @@
 	$encodeJson = json_encode($messages);
 
 	$LINEDatas['url'] = "https://api.line.me/v2/bot/message/reply";
- 	$LINEDatas['token'] = "1WXhWz3PtaV5ZjkMkZJFL15BvPJGcZesK+51a+K75Klua+yb2BEXpiSsL+eBMDcC2ygdIdegLR4CLihRsOZhcAGsdp92ui0HtDTKQ/JdYOEEu6YtEbEIj5X8+vTpd4RGZhH2Ke7GbLeBV01NFWl1+QdB04t89/1O/w1cDnyilFU=";
+ 	$LINEDatas['token'] = "VwWkOSS39IWXMExM5SASHLT8V7GJMCIaFeMWy3HI19fP28GZz8v/K2LpDHqmjWNuhZzUMLWe4sJGOcjLZAm2ofyv8/dtH0ILQPGaUeQgOMTdw35+o0ZbD7yDg1qu7AYw5rKb9HXJyZvu/tgX0UckrAdB04t89/1O/w1cDnyilFU=";
   	$results = sentMessage($encodeJson,$LINEDatas);
 
 	/*Return HTTP Request 200*/
