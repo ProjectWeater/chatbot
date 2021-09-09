@@ -24,7 +24,7 @@
 		$url = "https://api.thingspeak.com/channels/1483851/feeds.json?results=1";
 		$strRet = file_get_contents($url);
 		$strRet = json_decode($strRet);
-		$test = $strRet->feeds[0]->field2;
+		$test = $strRet->feeds["field2"];
 		$rep_msg['text'] = $test;
 		$rep_msg['type']='text';
 	}else if($recv_msg == "อยู่ไหน"){
