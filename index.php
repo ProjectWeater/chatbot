@@ -16,11 +16,15 @@
 	$messages['replyToken'] = $replyToken;
 	$rep_msg = [];
 
-	if($recv_msg == "Toi") {
-		$url = "http://api.thingspeak.com/channels/1486243/feeds.json?results=1";
+	if($recv_msg == "สวัสดี") {
+		$rep_msg ['text'] = "สวัสดีครับ";
+		$rep_msg ['type'] = 'text';
+
+	}else if($recv_msg == "อุณหภูมิ") {
+		$url = "https://api.thingspeak.com/channels/1483851/feeds.json?results=1";
 		$strRet = file_get_contents($url);
 		$strRet = json_decode($strRet);
-		$test = $strRet->channel->field3;
+		$test = $strRet->channel->feeds[0]->field2;
 		$rep_msg['text'] = $test;
 		$rep_msg['type']='text';
 	}else if($recv_msg == "อยู่ไหน"){
