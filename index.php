@@ -26,6 +26,13 @@
 		$temp = $strRet->feeds[0]->field2;
 		$rep_msg['text'] = $temp;
 		$rep_msg['type']='text';
+	}else if($recv_msg == "ความชื้น") {
+		$url = "https://api.thingspeak.com/channels/1483851/feeds.json?results=1";
+		$strRet = file_get_contents($url);
+		$strRet = json_decode($strRet);
+		$temp = $strRet->feeds[0]->field1;
+		$rep_msg['text'] = $temp;
+		$rep_msg['type']='text';
 	}else if($recv_msg == "รูปภาพ"){
 		$url = "http://api.thingspeak.com/channels/1486243/feeds.json?results=1";
 		$strRet = file_get_contents($url);
