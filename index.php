@@ -22,16 +22,17 @@
 	}else if($recv_msg == "อุณหภูมิ") {
 		$url = "https://api.thingspeak.com/channels/1483851/feeds.json?results=1";
 		$strRet = file_get_contents($url);
-		$strRet = json_decode($strRet,ture);
-		$temp = $strRet->feeds[0]->field1;
+		$strRet = json_decode($strRet);
+		$temp = $strRet->feeds[0]->field2;
 		$rep_msg['text'] = $temp;
 		$rep_msg['type']='text';
-	}else if($recv_msg == "อยู่ไหน"){
-		$rep_msg['title']='My HOme';
-		$rep_msg['address']='1-6-1 Yotsuya, Shinjuku-ku, Tokyo, 160-0004, Japan';
-		$rep_msg['latitude']= 35.687574;
-		$rep_msg['longitude']= 139.72922;
-		$rep_msg['type']='location';
+	}else if($recv_msg == "รูปภาพ"){
+		$url = "http://api.thingspeak.com/channels/1486243/feeds.json?results=1";
+		$strRet = file_get_contents($url);
+		$strRet = json_decode($strRet);
+		$pic = $strRet->feeds[0]->field1;
+		$rep_msg['text'] = $pic;
+		$rep_msg['type']='image';
 	}
 	else{
 		$rep_msg['originalContentUrl'] = "https://i.imgur.com/ObxhSgt.png";
