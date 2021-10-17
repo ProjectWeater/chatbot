@@ -37,8 +37,8 @@
 		$url = "http://api.thingspeak.com/channels/1486243/feeds.json?results=1";
 		$strRet = file_get_contents($url);
 		$strRet = json_decode($strRet);
-		$pic = $strRet->feeds[0]->field1;
-		$rep_msg['text'] = $pic;
+		$pic = $strRet->feeds[0]->field4;
+		$rep_msg['image'] = "https://i.imgur.com/"+$pic".png";
 		$rep_msg['type']='image';
 	}
 	else{
