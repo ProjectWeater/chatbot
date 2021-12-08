@@ -5,7 +5,69 @@
 	$deCode = json_decode($datas,true);
 
 
-	file_put_contents('log.txt', file_get_contents('php://input') . PHP_EOL, FILE_APPEND);
+	curl -v -X POST https://api.line.me/v2/bot/richmenu \
+	-H 'Authorization: Bearer {channel access token}' \
+	-H 'Content-Type: application/json' \
+	-d \
+	'{
+	"size":{
+		"width":2500,
+		"height":1686
+	},
+	"selected": false,
+	"name": "LINE Developers Info",
+	"chatBarText": "Tap to open",
+	"areas": [
+		{
+			"bounds": {
+				"x": 34,
+				"y": 24,
+				"width": 169,
+				"height": 193
+			},
+			"action": {
+				"type": "uri",
+				"uri": "https://developers.line.biz/en/news/"
+			}
+		},
+		{
+			"bounds": {
+				"x": 229,
+				"y": 24,
+				"width": 207,
+				"height": 193
+			},
+			"action": {
+				"type": "uri",
+				"uri": "https://www.line-community.me/en/"
+			}
+		},
+		{
+			"bounds": {
+				"x": 461,
+				"y": 24,
+				"width": 173,
+				"height": 193
+			},
+			"action": {
+				"type": "uri",
+				"uri": "https://engineering.linecorp.com/en/blog/"
+			}
+		}
+	]
+	}'
+
+	{
+		"richMenuId": "richmenu-88c05ef6921ae53f8b58a25f3a65faf7"
+	}
+
+	curl -v -X POST https://api-data.line.me/v2/bot/richmenu/richmenu-88c05ef6921ae53f8b58a25f3a65faf7/content \
+	-H "Authorization: Bearer {channel access token}" \
+	-H "Content-Type: image/jpeg" \
+	-T image.jpg
+
+	curl -v -X POST https://api.line.me/v2/bot/user/all/richmenu/richmenu-88c05ef6921ae53f8b58a25f3a65faf7 \
+	-H "Authorization: Bearer {channel access token}"
 
 	$replyToken = $deCode['events'][0]['replyToken'];
 	$recv_msg = $deCode['events'][0]['message']['text'];
